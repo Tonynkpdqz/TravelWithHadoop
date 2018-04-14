@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nkpdqz.dao.PlaceDao">
+
+    <select id="getPlaceId">
+        SELECT cityId from place where cityname = #{0}
+    </select>
+    
+    <select id="getPlaceByName" resultMap="cityMap">
+        SELECT * from place where cityname = #{0}
+    </select>
+    
+    <resultMap id="cityMap" type="com.nkpdqz.domain.Place">
+        <id column="cityId" property="cityId"/>
+        <result property="cityname" column="cityname"/>
+        <result property="scenic_spot" column="scenicspot"/>
+        <result property="nicefood" column="nicefood"/>
+    </resultMap>
+
+    <select id="getPlaceById" resultMap="cityMap">
+        SELECT * from place WHERE cityId=#{0}
+    </select>
+
+    <insert id="insertPlace">
+        INSERT into place(cityname) VALUES (#{0})
+    </insert>
+</mapper>
